@@ -11,19 +11,29 @@ function App() {
 
   const [text, setText] = useState("");
 
+  function addTodo() {
+  const trimmed = text.trim();
+  if (!trimmed) return;
+  setTodos([
+    ...todos,
+    { id: Date.now(), text: trimmed, done: false },
+  ]);
+  setText("");
+}
+
   return (
     <main>
       <h1>Travel List</h1>
 
-      <form>
+      <section>
         <input
           type="text"
           value={text}
           onChange={(event) => setText(event.target.value)}
           placeholder="Skriv en ny uppgift"
         />
-        <button type="button">Lägg till</button>
-      </form>
+        <button type="button" onClick={addTodo}>Lägg till</button>
+      </section>
 
       <ul>
         {todos.map((todo) => (
