@@ -20,6 +20,12 @@ function App() {
   ]);
   setText("");
 }
+function toggleDone(id) {
+  setTodos(
+    todos.map((todo) =>
+      todo.id === id ? { ...todo, done: !todo.done } : todo)
+  );
+}
 
   return (
     <main>
@@ -34,12 +40,13 @@ function App() {
         />
         <button type="button" onClick={addTodo}>Lägg till</button>
       </section>
-
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
-            <input type="checkbox" />
-            <span>{todo.text}</span>
+            <button type="button" onClick={() => toggleDone(todo.id)}>
+            {todo.done ? "Klar" : "Oklar"}
+          </button>
+           <span>{todo.text}</span>
             <button type="button">Ta bort</button>
           </li>
         ))}
