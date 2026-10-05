@@ -1,16 +1,25 @@
-# React + Vite
+# 1. State handling
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Vi använder state eftersom listan med uppgifter kan förändras när användaren lägger till, markerar eller tar bort en uppgift. Jag använder useState för att lagra alla uppgifter i todos. När en uppgift läggs till, markeras som klar eller tas bort uppdateras state med setTodos. När state ändras renderar React om UI och visar den aktuella listan direkt.
 
-Currently, two official plugins are available:
+## 2. Immutability
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Immutability betyder att vi inte ändrar den befintliga state direkt, utan skapar en ny version av datan. Jag använder ...todos och filter() för att skapa nya arrayer när uppgifter läggs till eller tas bort. Jag använder inte .push() eftersom den ändrar den befintliga arrayen direkt.
 
-## React Compiler
+### 3. Kodgranskning
+Vad är fel med koden?
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+function addTodo(todos, text) {
+  todos.push(text);
+  return todos;
+}
+Koden försöker att lägga till en ny uppgift i listan, men problemet är att push() ändrar den befintliga arrayen direkt. I React ska state inte muteras direkt, utan en ny array ska skapas och användas när state uppdateras.
+En bättre lösning:
 
-## Expanding the ESLint configuration
+function addTodo(text) {
+  setTodos([...todos, text]);
+}
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+#### 4. Problemlösning och reflektion
+
+Under arbetet har jag stött på problem med bland annat state, props och funktioner. Ett exempel var koden för att ändra status på en uppgift, där jag fick hjälp av ChatGPT att skriva lösningen och sedan bad jag om en fullständig förklaring av koden, till exempel todo.id === id ? { ...todo, done: !todo.done } : todo. Jag ställde frågor för att förstå varför koden fungerar och hur varje del hänger ihop, och testade sedan funktionen själv i applikationen. ChatGPT har varit ett stöd under arbetet, men jag har själv följt koden, ställt frågor och kontrollerat resultatet genom att testa applikationen.
