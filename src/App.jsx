@@ -26,6 +26,9 @@ function toggleDone(id) {
       todo.id === id ? { ...todo, done: !todo.done } : todo)
   );
 }
+function removeTodo(id) {
+  setTodos(todos.filter((todo) => todo.id !== id));
+}
 
   return (
     <main>
@@ -47,8 +50,10 @@ function toggleDone(id) {
             {todo.done ? "Klar" : "Oklar"}
           </button>
            <span>{todo.text}</span>
-            <button type="button">Ta bort</button>
-          </li>
+        <button type="button" onClick={() => removeTodo(todo.id)}>
+          Ta bort
+        </button>     
+     </li>
         ))}
       </ul>
     </main>
