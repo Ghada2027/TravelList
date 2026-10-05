@@ -45,12 +45,14 @@ function removeTodo(id) {
       </section>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>
+          <li  className="todo-item" key={todo.id}>
             <button type="button" onClick={() => toggleDone(todo.id)}>
             {todo.done ? "Klar" : "Oklar"}
           </button>
-           <span>{todo.text}</span>
-        <button type="button" onClick={() => removeTodo(todo.id)}>
+          <span className={todo.done ? "completed" : ""}>
+            {todo.text}
+          </span>   
+         <button type="button" onClick={() => removeTodo(todo.id)}>
           Ta bort
         </button>     
      </li>
