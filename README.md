@@ -1,3 +1,10 @@
+## Muntlig redovisning
+
+
+https://funet-my.sharepoint.com/:v:/g/personal/3ggyhmu26_dahegh_folkuniversitetet_nu/IQAMDftgNpRdQbcYn9wLkpS9ASQZoZxdsk3qiy-uRfLf9LY
+
+-----------------------------------------------------------------------------------
+
 # 1. State handling
 
 Vi använder state eftersom listan med uppgifter kan förändras när användaren lägger till, markerar eller tar bort en uppgift. Jag använder useState för att lagra alla uppgifter i todos. När en uppgift läggs till, markeras som klar eller tas bort uppdateras state med setTodos. När state ändras renderar React om UI och visar den aktuella listan direkt.
